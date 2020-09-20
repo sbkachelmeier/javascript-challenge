@@ -20,7 +20,6 @@ tableData.forEach((UFOsight) => {
 //     console.log(d3.event.target);
 
 
-
 // Create event handlers 
 button.on("click", runEnter);
 form.on("submit",runEnter);
