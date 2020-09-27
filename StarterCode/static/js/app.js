@@ -5,40 +5,56 @@ var tableData = data;
 var tbody = d3.select("tbody");
 
 // Add the table
-tableData.forEach((UFOsight) => {
+tableData.forEach((UFOsight) => 
+{
     var row = tbody.append("tr");
-    Object.entries(UFOsight).forEach(([key, value]) => {
+    Object.entries(UFOsight).forEach(([key, value]) => 
+    {
       var cell = row.append("td");
       cell.text(value);
     });
-  });
+});
 
-  // Make the button
-  var button = d3.select("#filter-btn");
-   button.on("click", function() {
-//     console.log("Hi, a button was clicked!");
-//     console.log(d3.event.target);
+//Make the button
+    var button = d3.select("#filter-btn");
+    var form = d3.select("#form");
 
 
-// Create event handlers 
-button.on("click", runEnter);
-form.on("submit",runEnter);
+    // Create event handlers 
+    button.on("click", runEnter);
+    form.on("submit",runEnter);
 
-
+//Make the function
+    function runEnter() 
+    {
 // Prevent the page from refreshing
-d3.event.preventDefault();
-  
+    d3.event.preventDefault();
+    
 // Select the input element and get the raw HTML node
-var inputElement = d3.select("#form-control");
+    var inputElement = d3.select("#datetime");
 
 // Get the value property of the input element
-var inputValue = inputElement.property("value");
+    var inputValue = inputElement.property("value");
 
-  console.log(inputValue);
-  console.log(form-control);
+// Create a custom filtering function
+    function selectDate(sighting) {
+    return sighting.datetime = inputValue;
+}
 
-  var filteredData = form-control.filter(person => datetime === inputValue);
+// filter() uses the custom function as its argument
+var dateFilter = data.filter(selectDate);
 
-  console.log(filteredData);
+// Test
+console.log(dateFilter);
 
-   });
+// Display new table 
+// Add the table
+dateFilter.forEach((sighting) => 
+{
+    var row = tbody.append("tr");
+    Object.entries(sighting).forEach(([key, value]) => 
+    {
+      var cell = row.append("td");
+      cell.text(value);
+    });
+});
